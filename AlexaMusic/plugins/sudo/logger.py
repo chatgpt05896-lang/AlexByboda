@@ -29,13 +29,19 @@ async def logger(client, message, _):
     usage = _["log_1"]
     if len(message.command) != 2:
         return await message.reply_text(usage)
+    
     state = message.text.split(None, 1)[1].strip()
     state = state.lower()
-    if state == "enable":
+    
+    # تم التعديل ليقبل "تفعيل" بالعربية بجانب "enable"
+    if state in ["enable", "تفعيل"]:
         await add_on(config.LOG)
         await message.reply_text(_["log_2"])
-    elif state == "disable":
+    
+    # تم التعديل ليقبل "تعطيل" بالعربية بجانب "disable"
+    elif state in ["disable", "تعطيل"]:
         await add_off(config.LOG)
         await message.reply_text(_["log_3"])
+    
     else:
         await message.reply_text(usage)
