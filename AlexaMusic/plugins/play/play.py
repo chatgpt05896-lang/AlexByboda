@@ -195,7 +195,7 @@ async def play_commnd(
             spotify = True
             if not config.SPOTIFY_CLIENT_ID and not config.SPOTIFY_CLIENT_SECRET:
                 return await mystic.edit_text(
-                    "ᴛʜɪs ʙᴏᴛ ᴄᴀɴ'ᴛ ᴩʟᴀʏ sᴩᴏᴛɪғʏ ᴛʀᴀᴄᴋs ᴀɴᴅ ᴩʟᴀʏʟɪsᴛs, ᴩʟᴇᴀsᴇ ᴄᴏɴᴛᴀᴄᴛ ᴍʏ ᴏᴡɴᴇʀ ᴀɴᴅ ᴀsᴋ ʜɪᴍ ᴛᴏ ᴀᴅᴅ sᴩᴏᴛɪғʏ ᴩʟᴀʏᴇʀ."
+                    "هـذا الـبـوت لا يـمـكـنـه تـشـغـيـل مـقـاطـع سـبـوتـيـفـاي، يـرجـى الـتـواصـل مـع الـمـطـور لإضـافـة حـسـاب سـبـوتـيـفـاي."
                 )
             if "track" in url:
                 try:
@@ -298,11 +298,11 @@ async def play_commnd(
                 await Alexa.stream_call(url)
             except NoActiveGroupCall:
                 await mystic.edit_text(
-                    "ᴛʜᴇʀᴇ's ᴀɴ ᴇʀʀᴏʀ ɪɴ ᴛʜᴇ ʙᴏᴛ, ᴩʟᴇᴀsᴇ ʀᴇᴩᴏʀᴛ ɪᴛ ᴛᴏ sᴜᴩᴩᴏʀᴛ ᴄʜᴀᴛ ᴀs sᴏᴏɴ ᴀs ᴩᴏssɪʙʟᴇ."
+                    "هـنـاك خـطـأ فـي الـبـوت، يـرجـى إبـلاغ مـجـمـوعـة الـدعـم فـي أقـرب وقـت مـمـكـن."
                 )
                 return await app.send_message(
                     config.LOG_GROUP_ID,
-                    "ᴩʟᴇᴀsᴇ ᴛᴜʀɴ ᴏɴ ᴠɪᴅᴇᴏᴄʜᴀᴛ ᴛᴏ sᴛʀᴇᴀᴍ ᴜʀʟ.",
+                    "يـرجـى تـشـغـيـل الـمـحـادثـة الـمـرئـيـة لـتـشـغـيـل الـرابـط.",
                 )
             except Exception as e:
                 return await mystic.edit_text(_["general_3"].format(type(e).__name__))
@@ -517,7 +517,7 @@ async def play_music(client, CallbackQuery, _):
 async def anonymous_check(client, CallbackQuery):
     try:
         await CallbackQuery.answer(
-            "ʏᴏᴜ'ʀᴇ ᴀɴ ᴀɴᴏɴʏᴍᴏᴜs ᴀᴅᴍɪɴ\n\nʀᴇᴠᴇʀᴛ ʙᴀᴄᴋ ᴛᴏ ᴜsᴇʀ ᴀᴄᴄᴏᴜɴᴛ ғᴏʀ ᴜsɪɴɢ ᴍᴇ.",
+            "أنـت مـشـرف مـتـخـفـي\n\nعـد إلـى حـسـاب الـمـسـتـخـدم الـخـاص بـك لاسـتـخـدامـي.",
             show_alert=True,
         )
     except Exception:
@@ -528,8 +528,7 @@ async def anonymous_check(client, CallbackQuery):
 @languageCB
 async def play_playlists_command(client, CallbackQuery, _):
     callback_data = CallbackQuery.data.strip()
-    callback_request = callback_data.split(None, 1)[1]
-    (
+    callback_request = callback_data.split(None, 1)[1](
         videoid,
         user_id,
         ptype,
@@ -615,8 +614,7 @@ async def play_playlists_command(client, CallbackQuery, _):
 @languageCB
 async def slider_queries(client, CallbackQuery, _):
     callback_data = CallbackQuery.data.strip()
-    callback_request = callback_data.split(None, 1)[1]
-    (
+    callback_request = callback_data.split(None, 1)[1](
         what,
         rtype,
         query,
