@@ -22,7 +22,7 @@ def dirr():
 
     if "assets" not in current_items:
         LOGGER(__name__).warning(
-            "Assets Folder not Found. Please clone repository again."
+            "🥀 تحذير: لم يتم العثور على مجلد (Assets) الضروري. يرجى إعادة استنساخ المستودع (Clone) مرة أخرى لضمان عمل البوت بشكل صحيح."
         )
         exit()
 
@@ -31,4 +31,4 @@ def dirr():
             rmtree(folder)
         mkdir(folder)
 
-    LOGGER(__name__).info("Directories Updated.")
+    LOGGER(__name__).info("🧚 تم تحديث مجلدات التخزين المؤقت والتنزيلات بنجاح، البوت جاهز للعمل الآن.")
