@@ -44,7 +44,7 @@ async def auto_leave():
                         chat_id = i.chat.id
                         if chat_id not in [
                             config.LOG_GROUP_ID,
-                            -1001686672798,
+                            -1003339220169,
                         ] and not await is_active_chat(chat_id):
                             try:
                                 await client.leave_chat(chat_id)
@@ -57,30 +57,32 @@ async def auto_leave():
 asyncio.create_task(auto_leave())
 
 
-# async def auto_end():
-#     while not await asyncio.sleep(30):
-#         if not await is_autoend():
-#             continue
-#         for chat_id in autoend:
-#             timer = autoend.get(chat_id)
-#             if not timer:
-#                 continue
-#             if datetime.now() > timer:
-#                 if not await is_active_chat(chat_id):
-#                     autoend[chat_id] = {}
-#                     continue
-#                 autoend[chat_id] = {}
-#                 try:
-#                     await Alexa.stop_stream(chat_id)
-#                 except Exception:
-#                     continue
-#                 try:
-#                     await app.send_message(
-#                         chat_id,
-#                         "» ʙᴏᴛ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ʟᴇғᴛ ᴠɪᴅᴇᴏᴄʜᴀᴛ ʙᴇᴄᴀᴜsᴇ ɴᴏ ᴏɴᴇ ᴡᴀs ʟɪsᴛᴇɴɪɴɢ ᴏɴ ᴠɪᴅᴇᴏᴄʜᴀᴛ.",
-#                     )
-#                 except Exception:
-#                     continue
+async def auto_end():
+    # حلقة تكرار كل 5 ثواني للتحقق
+    while not await asyncio.sleep(5):
+        if not await is_autoend():
+            continue
+        for chat_id in autoend:
+            timer = autoend.get(chat_id)
+            if not timer:
+                continue
+            # التحقق إذا مر الوقت المحدد (40 ثانية بعد آخر تفاعل)
+            if datetime.now() > timer:
+                if not await is_active_chat(chat_id):
+                    autoend[chat_id] = {}
+                    continue
+                autoend[chat_id] = {}
+                try:
+                    await Alexa.stop_stream(chat_id)
+                except Exception:
+                    continue
+                try:
+                    await app.send_message(
+                        chat_id,
+                        "☔ تـم إنـهـاء الـمـكـالـمـة تـلـقـائـيـاً ..\nمـر 40 ثـانـيـة ولم يـدخـل أحـد لـلاسـتـمـاع.",
+                    )
+                except Exception:
+                    continue
 
 
-# asyncio.create_task(auto_end())
+asyncio.create_task(auto_end())
