@@ -71,16 +71,16 @@ async def language_markup(client, CallbackQuery, _):
     old = await get_lang(CallbackQuery.message.chat.id)
     if str(old) == str(langauge):
         return await CallbackQuery.answer(
-            "ʏᴏᴜ'ʀᴇ ᴀʟʀᴇᴀᴅʏ ᴜsɪɴɢ sᴀᴍᴇ ʟᴀɴɢᴜᴀɢᴇ ғᴏʀ ᴛʜɪs ᴄʜᴀᴛ.", show_alert=True
+            f"🧚 يا {CallbackQuery.from_user.first_name}، أنت بالفعل تستخدم هذه اللغة في المجموعة، لا داعي لتغييرها مرة أخرى.", show_alert=True
         )
     try:
         _ = get_string(langauge)
         await CallbackQuery.answer(
-            "sᴜᴄᴄᴇssғᴜʟʟʏ ᴄʜᴀɴɢᴇᴅ ʏᴏᴜʀ ʟᴀɴɢᴜᴀɢᴇ.", show_alert=True
+            f"🤍 تم تغيير لغة البوت بنجاح إلى اللغة المختارة يا {CallbackQuery.from_user.first_name}، استمتع بالتجربة.", show_alert=True
         )
     except Exception:
         return await CallbackQuery.answer(
-            "ғᴀɪʟᴇᴅ ᴛᴏ ᴄʜᴀɴɢᴇ ʟᴀɴɢᴜᴀɢᴇ ᴏʀ ᴛʜᴇ ʟᴀɴɢᴜᴀɢᴇ ɪs ᴜɴᴅᴇʀ ᴍᴀɪɴᴛᴇɴᴀɴᴄᴇ.",
+            "🥀 عذراً، فشل البوت في تغيير اللغة حالياً أو أنها قيد الصيانة، يرجى المحاولة في وقت لاحق.",
             show_alert=True,
         )
     await set_lang(CallbackQuery.message.chat.id, langauge)
