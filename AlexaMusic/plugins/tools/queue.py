@@ -55,11 +55,11 @@ async def ping_com(client, message: Message, _):
     if message.command[0][0] == "c":
         chat_id = await get_cmode(message.chat.id)
         if chat_id is None:
-            return await message.reply_text("🍒 تـأكـد مـن ربـط الـقـنـاة بـالـمـجـمـوعـة أولاً.")
+            return await message.reply_text("☔ تـأكـد مـن ربـط الـقـنـاة بـالـمـجـمـوعـة أولاً.")
         try:
             await app.get_chat(chat_id)
         except Exception:
-            return await message.reply_text("🍒 فـشـل فـي الـحـصـول عـلـى مـعـلـومـات الـقـنـاة، تـأكـد أن الـبـوت مـشـرف هـنـاك.")
+            return await message.reply_text("🤍 فـشـل فـي الـحـصـول عـلـى مـعـلـومـات الـقـنـاة، تـأكـد أن الـبـوت مـشـرف هـنـاك.")
         cplay = True
     else:
         chat_id = message.chat.id
