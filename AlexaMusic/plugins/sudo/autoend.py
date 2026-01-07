@@ -25,18 +25,22 @@ AUTOEND_COMMAND = get_command("AUTOEND_COMMAND")
 
 @app.on_message(filters.command(AUTOEND_COMMAND) & SUDOERS)
 async def auto_end_stream(client, message):
-    usage = "**ᴜsᴀɢᴇ:**\n\n/autoend [enable|disable]"
+    # تم تعريب رسالة الاستخدام وإزالة العلامة /
+    usage = "**طـريـقـة الاسـتـخـدام :**\n\nانهاء تلقائي [تفعيل|تعطيل]"
     if len(message.command) != 2:
         return await message.reply_text(usage)
     state = message.text.split(None, 1)[1].strip()
     state = state.lower()
-    if state == "enable":
+    
+    # تم تعديل الشرط ليقبل كلمة "enable" أو "تفعيل"
+    if state in ["enable", "تفعيل"]:
         await autoend_on()
         await message.reply_text(
-            "ᴀᴜᴛᴏ ᴇɴᴅ sᴛʀᴇᴀᴍ ᴇɴᴀʙʟᴇᴅ.\n\nᴀssɪsᴛᴀɴᴛ ᴡɪʟʟ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ʟᴇᴀᴠᴇ ᴛʜᴇ ᴠɪᴅᴇᴏᴄʜᴀᴛ ᴀғᴛᴇʀ ғᴇᴡ ᴍɪɴs ᴡʜᴇɴ ɴᴏ ᴏɴᴇ ɪs ʟɪsᴛᴇɴɪɴɢ ᴡɪᴛʜ ᴀ ᴡᴀʀɴɪɴɢ ᴍᴇssᴀɢᴇ."
+            "تـم تـفـعـيـل الإغـلاق الـتـلـقـائـي .\n\nسـيـغـادر الـحـسـاب الـمـسـاعـد الـمـحـادثـة الـصـوتـيـة تـلـقـائـيـاً بـعـد بـضـع دقـائـق عـنـد عـدم وجـود أي شـخـص فـي الـمـكـالـمـة ."
         )
-    elif state == "disable":
+    # تم تعديل الشرط ليقبل كلمة "disable" أو "تعطيل"
+    elif state in ["disable", "تعطيل"]:
         await autoend_off()
-        await message.reply_text("ᴀᴜᴛᴏ ᴇɴᴅ sᴛʀᴇᴀᴍ ᴅɪsᴀʙʟᴇᴅ.")
+        await message.reply_text("تـم تـعـطـيـل الإغـلاق الـتـلـقـائـي .")
     else:
         await message.reply_text(usage)
