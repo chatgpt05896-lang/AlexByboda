@@ -25,13 +25,29 @@ ADDSUDO_COMMAND = get_command("ADDSUDO_COMMAND")
 DELSUDO_COMMAND = get_command("DELSUDO_COMMAND")
 SUDOUSERS_COMMAND = get_command("SUDOUSERS_COMMAND")
 
+# إضافة الأوامر العربية
+if isinstance(ADDSUDO_COMMAND, str):
+    ADDSUDO_COMMAND = [ADDSUDO_COMMAND, "رفع مطور"]
+elif isinstance(ADDSUDO_COMMAND, list):
+    ADDSUDO_COMMAND.append("رفع مطور")
+
+if isinstance(DELSUDO_COMMAND, str):
+    DELSUDO_COMMAND = [DELSUDO_COMMAND, "تنزيل مطور"]
+elif isinstance(DELSUDO_COMMAND, list):
+    DELSUDO_COMMAND.append("تنزيل مطور")
+
+if isinstance(SUDOUSERS_COMMAND, str):
+    SUDOUSERS_COMMAND = [SUDOUSERS_COMMAND, "المطورين"]
+elif isinstance(SUDOUSERS_COMMAND, list):
+    SUDOUSERS_COMMAND.append("المطورين")
+
 
 @app.on_message(filters.command(ADDSUDO_COMMAND) & filters.user(OWNER_ID))
 @language
 async def useradd(client, message: Message, _):
     if MONGO_DB_URI is None:
         return await message.reply_text(
-            "**ᴅᴜᴇ ᴛᴏ {MUSIC_BOT_NAME}'s ᴩʀɪᴠᴀᴄʏ ɪssᴜᴇs, ʏᴏᴜ ᴄᴀɴ'ᴛ ᴍᴀɴᴀɢᴇ sᴜᴅᴏ ᴜsᴇʀs ᴏɴ {MUSIC_BOT_NAME} ᴅᴀᴛᴀʙᴀsᴇ.\n\n ᴩʟᴇᴀsᴇ ᴀᴅᴅ ʏᴏᴜʀ ᴍᴏɴɢᴏ ᴅᴀᴛᴀʙᴀsᴇ ɪɴ ᴠᴀʀs ᴛᴏ ᴜsᴇ ᴛʜɪs ғᴇᴀᴛᴜʀᴇ.**"
+            f"**بـسـبـب سـيـاسـة الـخـصـوصـيـة لـ {MUSIC_BOT_NAME} ، لا يـمـكـنـك إدارة قـائـمـة الـمـطـوريـن عـلـى قـاعـدة بـيـانـات الـبـوت الـافـتـراضـيـة .\n\nيـرجـى إضـافـة مـتـغـيـر MONGO_DB_URI الـخـاص بـك لاسـتـخـدام هـذه الـمـيـزة .**"
         )
     if not message.reply_to_message:
         if len(message.command) != 2:
@@ -47,7 +63,7 @@ async def useradd(client, message: Message, _):
             SUDOERS.add(user.id)
             await message.reply_text(_["sudo_2"].format(user.mention))
         else:
-            await message.reply_text("ғᴀɪʟᴇᴅ.")
+            await message.reply_text("فـشـل .")
         return
     if message.reply_to_message.from_user.id in SUDOERS:
         return await message.reply_text(
@@ -60,7 +76,7 @@ async def useradd(client, message: Message, _):
             _["sudo_2"].format(message.reply_to_message.from_user.mention)
         )
     else:
-        await message.reply_text("ғᴀɪʟᴇᴅ.")
+        await message.reply_text("فـشـل .")
     return
 
 
@@ -69,7 +85,7 @@ async def useradd(client, message: Message, _):
 async def userdel(client, message: Message, _):
     if MONGO_DB_URI is None:
         return await message.reply_text(
-            "**ᴅᴜᴇ ᴛᴏ {MUSIC_BOT_NAME}'s ᴩʀɪᴠᴀᴄʏ ɪssᴜᴇs, ʏᴏᴜ ᴄᴀɴ'ᴛ ᴍᴀɴᴀɢᴇ sᴜᴅᴏ ᴜsᴇʀs ᴏɴ {MUSIC_BOT_NAME} ᴅᴀᴛᴀʙᴀsᴇ.\n\n ᴩʟᴇᴀsᴇ ᴀᴅᴅ ʏᴏᴜʀ ᴍᴏɴɢᴏ ᴅᴀᴛᴀʙᴀsᴇ ɪɴ ᴠᴀʀs ᴛᴏ ᴜsᴇ ᴛʜɪs ғᴇᴀᴛᴜʀᴇ.**"
+            f"**بـسـبـب سـيـاسـة الـخـصـوصـيـة لـ {MUSIC_BOT_NAME} ، لا يـمـكـنـك إدارة قـائـمـة الـمـطـوريـن عـلـى قـاعـدة بـيـانـات الـبـوت الـافـتـراضـيـة .\n\nيـرجـى إضـافـة مـتـغـيـر MONGO_DB_URI الـخـاص بـك لاسـتـخـدام هـذه الـمـيـزة .**"
         )
     if not message.reply_to_message:
         if len(message.command) != 2:
@@ -85,7 +101,7 @@ async def userdel(client, message: Message, _):
             SUDOERS.remove(user.id)
             await message.reply_text(_["sudo_4"])
             return
-        await message.reply_text("Something wrong happened.")
+        await message.reply_text("حـدث خـطـأ مـا .")
         return
     user_id = message.reply_to_message.from_user.id
     if user_id not in SUDOERS:
@@ -95,7 +111,7 @@ async def userdel(client, message: Message, _):
         SUDOERS.remove(user_id)
         await message.reply_text(_["sudo_4"])
         return
-    await message.reply_text("sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ.")
+    await message.reply_text("حـدث خـطـأ مـا .")
 
 
 @app.on_message(filters.command(SUDOUSERS_COMMAND) & ~BANNED_USERS)
