@@ -111,7 +111,7 @@ async def gstats_global(client, message: Message, _):
         vidid,
     ) = await YouTube.details(videoid, True)
     title = title.title()
-    final = f"Top Most Played Track on {MUSIC_BOT_NAME}\n\n**Title:** {title}\n\nPlayed** {co} **times"
+    final = f"الأكـثـر تـشـغـيـلاً عـلـى {MUSIC_BOT_NAME}\n\n**الـعـنـوان:** {title}\n\nتـم الـتـشـغـيـل** {co} **مـرة"
     upl = get_stats_markup(_, message.from_user.id in SUDOERS)
     await app.send_photo(
         message.chat.id,
@@ -135,7 +135,7 @@ async def top_users_ten(client, CallbackQuery: CallbackQuery, _):
         pass
     mystic = await CallbackQuery.edit_message_text(
         _["gstats_3"].format(
-            f"of {CallbackQuery.message.chat.title}" if what == "Here" else what
+            f"خـاص بـ {CallbackQuery.message.chat.title}" if what == "Here" else what
         )
     )
     if what == "Tracks":
@@ -177,9 +177,9 @@ async def top_users_ten(client, CallbackQuery: CallbackQuery, _):
                 details = stats.get(items)
                 title = (details["title"][:35]).title()
                 if items == "telegram":
-                    msg += f"🌹 [ᴛᴇʟᴇɢʀᴀᴍ ᴍᴇᴅɪᴀ](https://t.me/Shayri_Music_Lovers) ** ᴩʟᴀʏᴇᴅ {count} ᴛɪᴍᴇs**\n\n"
+                    msg += f"☔ [مـيـديـا تـيـلـيـجـرام](https://t.me/music0587) ** تـم الـتـشـغـيـل {count} مـرة**\n\n"
                 else:
-                    msg += f"🌹 [{title}](https://www.youtube.com/watch?v={items}) ** ᴩʟᴀʏᴇᴅ {count} ᴛɪᴍᴇs**\n\n"
+                    msg += f"☔ [{title}](https://www.youtube.com/watch?v={items}) ** تـم الـتـشـغـيـل {count} مـرة**\n\n"
 
             temp = (
                 _["gstats_4"].format(
@@ -217,7 +217,7 @@ async def top_users_ten(client, CallbackQuery: CallbackQuery, _):
             except Exception:
                 continue
             limit += 1
-            msg += f"💖 `{extract}` ᴩʟᴀʏᴇᴅ {count} ᴛɪᴍᴇs ᴏɴ ʙᴏᴛ.\n\n"
+            msg += f"💖 `{extract}` قـام بـالـتـشـغـيـل {count} مـرة عـلـى الـبـوت.\n\n"
         temp = (
             _["gstats_5"].format(limit, MUSIC_BOT_NAME)
             if what == "Chats"
@@ -255,25 +255,25 @@ async def overall_stats(client, CallbackQuery, _):
     fetch_playlist = config.PLAYLIST_FETCH_LIMIT
     song = config.SONG_DOWNLOAD_DURATION
     play_duration = config.DURATION_LIMIT_MIN
-    ass = "Yes" if config.AUTO_LEAVING_ASSISTANT == str(True) else "No"
+    ass = "نـعـم" if config.AUTO_LEAVING_ASSISTANT == str(True) else "لا"
     cm = config.CLEANMODE_DELETE_MINS
-    text = f"""🌹 **ʙᴏᴛ's sᴛᴀᴛs ᴀɴᴅ ɪɴғᴏ:**
+    text = f"""☔ **إحـصـائـيـات ومـعـلـومـات الـبـوت:**
 
-🌹 **ᴍᴏᴅᴜʟᴇs:** {mod}
-🌹 **ᴄʜᴀᴛs:** {served_chats} 
-🌹 **ᴜsᴇʀs:** {served_users} 
-🌹 **ʙʟᴏᴄᴋᴇᴅ:** {blocked} 
-🌹 **sᴜᴅᴏᴇʀs:** {sudoers} 
+☔ **الـمـوديـولات:** {mod}
+☔ **الـمـجـمـوعـات:** {served_chats} 
+☔ **الـمـسـتـخـدمـيـن:** {served_users} 
+☔ **الـمـحـظـوريـن:** {blocked} 
+☔ **الـمـطـوريـن:** {sudoers} 
     
-🌹 **ǫᴜᴇʀɪᴇs:** {total_queries} 
-🌹 **ᴀssɪsᴛᴀɴᴛs:** {assistant}
-🌹 **ᴀss ᴀᴜᴛᴏ ʟᴇᴀᴠᴇ:** {ass}
-🌹 **ᴄʟᴇᴀɴᴍᴏᴅᴇ:** {cm} ᴍɪɴᴜᴛᴇs
+☔ **عـمـلـيـات الـبـحـث:** {total_queries} 
+☔ **الـمـسـاعـديـن:** {assistant}
+☔ **مـغـادرة الـمـسـاعـد:** {ass}
+☔ **وﺿـﻊ الـتـنـظـيـف:** {cm} دقـيـقـة
 
-🌹 **ᴅᴜʀᴀᴛɪᴏɴ ʟɪᴍɪᴛ:** {play_duration} ᴍɪɴᴜᴛᴇs
-🌹 **ᴅᴏᴡɴʟᴏᴀᴅ ʟɪᴍɪᴛ:** {song} ᴍɪɴᴜᴛᴇs
-🌹 **ᴩʟᴀʏʟɪsᴛ ʟɪᴍɪᴛ:** {playlist_limit}
-🌹 **ᴩʟᴀʏʟɪsᴛ ᴩʟᴀʏ ʟɪᴍɪᴛ:** {fetch_playlist}"""
+☔ **حـد الـتـشـغـيـل:** {play_duration} دقـيـقـة
+☔ **حـد الـتـحـمـيـل:** {song} دقـيـقـة
+☔ **حـد قـائـمـة الـتـشـغـيـل:** {playlist_limit}
+☔ **حـد تـشـغـيـل الـقـائـمـة:** {fetch_playlist}"""
     med = InputMediaPhoto(media=config.STATS_IMG_URL, caption=text)
     try:
         await CallbackQuery.edit_message_media(media=med, reply_markup=upl)
@@ -287,7 +287,7 @@ async def overall_stats(client, CallbackQuery, _):
 @languageCB
 async def overall_stats(client, CallbackQuery, _):
     if CallbackQuery.from_user.id not in SUDOERS:
-        return await CallbackQuery.answer("ᴏɴʟʏ ғᴏʀ sᴜᴅᴏ ᴜsᴇʀs.", show_alert=True)
+        return await CallbackQuery.answer("لـلـمـطـوريـن فـقـط.", show_alert=True)
     callback_data = CallbackQuery.data.strip()
     what = callback_data.split(None, 1)[1]
     upl = overallback_stats_markup(_) if what != "s" else back_stats_buttons(_)
@@ -327,38 +327,38 @@ async def overall_stats(client, CallbackQuery, _):
     total_queries = await get_queries()
     blocked = len(BANNED_USERS)
     sudoers = len(await get_sudoers())
-    text = f"""🌹 **ʙᴏᴛ's sᴛᴀᴛs ᴀɴᴅ ɪɴғᴏ:**
+    text = f"""☔ **إحـصـائـيـات ومـعـلـومـات الـبـوت:**
 
-       <b><u>🌹 ʜᴀʀᴅᴡᴀʀᴇ</b><u/>
-🌹 **ᴍᴏᴅᴜʟᴇs:** {mod}
-🌹 **ᴩʟᴀᴛғᴏʀᴍ:** {sc}
-🌹 **ʀᴀᴍ:** {ram}
-🌹 **ᴩʜʏsɪᴄᴀʟ ᴄᴏʀᴇs:** {p_core}
-🌹 **ᴛᴏᴛᴀʟ ᴄᴏʀᴇs:** {t_core}
-🌹 **ᴄᴩᴜ ғʀᴇǫᴜᴇɴᴄʏ:** {cpu_freq}
+       <b><u>☔ الـنـظـام</b><u/>
+☔ **الـمـوديـولات:** {mod}
+☔ **الـمـنـصـة:** {sc}
+☔ **الـرام:** {ram}
+☔ **الأنـويـة الـحـقـيـقـيـة:** {p_core}
+☔ **إجـمـالـي الأنـويـة:** {t_core}
+☔ **تـردد الـمـعـالـج:** {cpu_freq}
 
-       <b><u>🌹 sᴏғᴛᴡᴀʀᴇ</b><u/>
-🌹 **ᴩʏᴛʜᴏɴ :** {pyver.split()[0]}
-🌹 **ᴩʏʀᴏɢʀᴀᴍ :** {pyrover}
-🌹 **ᴩʏ-ᴛɢᴄᴀʟʟs :** {pytgver}
+       <b><u>☔ الـبـرمـجـيـات</b><u/>
+☔ **بـايـثـون :** {pyver.split()[0]}
+☔ **بـايـروجـرام :** {pyrover}
+☔ **بـاي-تـي-جـي-كـولـز :** {pytgver}
 
-        <b><u>🌹 sᴛᴏʀᴀɢᴇ</b><u/>
-🌹 **ᴀᴠᴀɪʟᴀʙʟᴇ:** {total[:4]} GiB
-🌹 **ᴜsᴇᴅ:** {used[:4]} GiB
-🌹 **ғʀᴇᴇ:** {free[:4]} GiB
+        <b><u>☔ الـتـخـزيـن</b><u/>
+☔ **الـمـتـاح:** {total[:4]} GiB
+☔ **الـمـسـتـخـدم:** {used[:4]} GiB
+☔ **الـحـر:** {free[:4]} GiB
 
-      <b><u>🌹 ᴄᴜʀʀᴇɴᴛ sᴛᴀᴛs</b><u/>
-🌹 **ᴄʜᴀᴛs:** {served_chats} 
-🌹 **ᴜsᴇʀs:** {served_users} 
-🌹 **ʙʟᴏᴄᴋᴇᴅ:** {blocked} 
-🌹 **sᴜᴅᴏᴇʀs:** {sudoers} 
+      <b><u>☔ الإحـصـائـيـات الـحـالـيـة</b><u/>
+☔ **الـمـجـمـوعـات:** {served_chats} 
+☔ **الـمـسـتـخـدمـيـن:** {served_users} 
+☔ **الـمـحـظـوريـن:** {blocked} 
+☔ **الـمـطـوريـن:** {sudoers} 
 
-      <b><u>🌹 ᴍᴏɴɢᴏ ᴅᴀᴛᴀʙᴀsᴇ</b><u/>
-🌹 **sɪᴢᴇ:** {datasize[:6]} ᴍʙ
-🌹 **sᴛᴏʀᴀɢᴇ:** {storage} ᴍʙ
-🌹 **ᴄᴏʟʟᴇᴄᴛɪᴏɴs:** {collections}
-🌹 **ᴋᴇʏs:** {objects}
-🌹 **ʙᴏᴛ ǫᴜᴇʀɪᴇs:** `{total_queries}`
+      <b><u>☔ قـاعـدة بـيـانـات مـونـجـو</b><u/>
+☔ **الـحـجـم:** {datasize[:6]} مـيـجـا
+☔ **الـتـخـزيـن:** {storage} مـيـجـا
+☔ **الـمـجـمـوعـات:** {collections}
+☔ **الـمـفـاتـيـح:** {objects}
+☔ **اسـتـعـلامـات الـبـوت:** `{total_queries}`
     """
     med = InputMediaPhoto(media=config.STATS_IMG_URL, caption=text)
     try:
