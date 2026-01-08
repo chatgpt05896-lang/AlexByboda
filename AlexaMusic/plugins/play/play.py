@@ -42,7 +42,12 @@ from AlexaMusic.utils.database import is_served_user
 PLAY_COMMAND = get_command("PLAY_COMMAND")
 
 
-@app.on_message(filters.command(PLAY_COMMAND) & filters.group & ~BANNED_USERS)
+# التعديل تم هنا: إضافة prefixes=config.COMMAND_PREFIXES
+@app.on_message(
+    filters.command(PLAY_COMMAND, prefixes=config.COMMAND_PREFIXES)
+    & filters.group
+    & ~BANNED_USERS
+)
 @PlayWrapper
 async def play_commnd(
     client,
