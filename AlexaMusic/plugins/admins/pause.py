@@ -24,7 +24,12 @@ from AlexaMusic.utils.decorators import AdminRightsCheck
 PAUSE_COMMAND = get_command("PAUSE_COMMAND")
 
 
-@app.on_message(filters.command(PAUSE_COMMAND) & filters.group & ~BANNED_USERS)
+# التعديل هنا: ضفنا prefixes عشان يقبل الأمر بدون علامات
+@app.on_message(
+    filters.command(PAUSE_COMMAND, prefixes=["/", "!", "", "."])
+    & filters.group
+    & ~BANNED_USERS
+)
 @AdminRightsCheck
 async def pause_admin(cli, message: Message, _, chat_id):
     if len(message.command) != 1:
