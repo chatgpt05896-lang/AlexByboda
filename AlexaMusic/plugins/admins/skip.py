@@ -29,7 +29,12 @@ from AlexaMusic.utils.thumbnails import gen_thumb
 SKIP_COMMAND = get_command("SKIP_COMMAND")
 
 
-@app.on_message(filters.command(SKIP_COMMAND) & filters.group & ~BANNED_USERS)
+# التعديل هنا: ضفنا prefixes عشان يقبل الأمر بدون سلاش
+@app.on_message(
+    filters.command(SKIP_COMMAND, prefixes=["/", "!", "", "."])
+    & filters.group
+    & ~BANNED_USERS
+)
 @AdminRightsCheck
 async def skip(cli, message: Message, _, chat_id):
     if not len(message.command) < 2:
