@@ -179,14 +179,16 @@ async def del_back_playlist(client, CallbackQuery, _):
         )
     elif command == "Skip":
         check = db.get(chat_id)
-        txt = f"» ᴛʀᴀᴄᴋ sᴋɪᴩᴩᴇᴅ ʙʏ {mention} !"
+        # تم تعريب الرسالة هنا
+        txt = f"» تم تخطي المقطع بواسطة {mention} !"
         popped = None
         try:
             if popped := check.pop(0):
                 if AUTO_DOWNLOADS_CLEAR == str(True):
                     await auto_clean(popped)
             if not check:
-                await CallbackQuery.edit_message_text(f"» ᴛʀᴀᴄᴋ sᴋɪᴩᴩᴇᴅ ʙʏ {mention} !")
+                # تم تعريب الرسالة هنا
+                await CallbackQuery.edit_message_text(f"» تم تخطي المقطع بواسطة {mention} !")
                 await CallbackQuery.message.reply_text(
                     _["admin_10"].format(mention), disable_web_page_preview=True
                 )
@@ -196,7 +198,8 @@ async def del_back_playlist(client, CallbackQuery, _):
                     return
         except Exception:
             try:
-                await CallbackQuery.edit_message_text(f"» ᴛʀᴀᴄᴋ sᴋɪᴩᴩᴇᴅ ʙʏ {mention} !")
+                # تم تعريب الرسالة هنا
+                await CallbackQuery.edit_message_text(f"» تم تخطي المقطع بواسطة {mention} !")
                 await CallbackQuery.message.reply_text(
                     _["admin_10"].format(mention), disable_web_page_preview=True
                 )
@@ -353,16 +356,18 @@ async def del_back_playlist(client, CallbackQuery, _):
         if int(command) in [1, 3]:
             if (duration_played - duration_to_skip) <= 10:
                 bet = seconds_to_min(duration_played)
+                # تم تعريب رسالة الخطأ هنا
                 return await CallbackQuery.answer(
-                    f"» ʙᴏᴛ ɪs ᴜɴᴀʙʟᴇ ᴛᴏ sᴇᴇᴋ ʙᴇᴄᴀᴜsᴇ ᴛʜᴇ ᴅᴜʀᴀᴛɪᴏɴ ᴇxᴄᴇᴇᴅs.\n\nᴄᴜʀʀᴇɴᴛʟʏ ᴩʟᴀʏᴇᴅ :** {bet}** ᴍɪɴᴜᴛᴇs ᴏᴜᴛ ᴏғ **{duration}** ᴍɪɴᴜᴛᴇs.",
+                    f"» البوت لا يمكنه التقديم/التأخير لأن المدة تتجاوز الحدود.\n\nتم تشغيل: **{bet}** دقيقة من أصل **{duration}** دقيقة.",
                     show_alert=True,
                 )
             to_seek = duration_played - duration_to_skip + 1
         else:
             if (duration_seconds - (duration_played + duration_to_skip)) <= 10:
                 bet = seconds_to_min(duration_played)
+                # تم تعريب رسالة الخطأ هنا
                 return await CallbackQuery.answer(
-                    f"» ʙᴏᴛ ɪs ᴜɴᴀʙʟᴇ ᴛᴏ sᴇᴇᴋ ʙᴇᴄᴀᴜsᴇ ᴛʜᴇ ᴅᴜʀᴀᴛɪᴏɴ ᴇxᴄᴇᴇᴅs.\n\nᴄᴜʀʀᴇɴᴛʟʏ ᴩʟᴀʏᴇᴅ :** {bet}** ᴍɪɴᴜᴛᴇs ᴏᴜᴛ ᴏғ **{duration}** ᴍɪɴᴜᴛᴇs.",
+                    f"» البوت لا يمكنه التقديم/التأخير لأن المدة تتجاوز الحدود.\n\nتم تشغيل: **{bet}** دقيقة من أصل **{duration}** دقيقة.",
                     show_alert=True,
                 )
             to_seek = duration_played + duration_to_skip + 1
@@ -387,4 +392,5 @@ async def del_back_playlist(client, CallbackQuery, _):
         else:
             db[chat_id][0]["played"] += duration_to_skip
         string = _["admin_33"].format(seconds_to_min(to_seek))
-        await mystic.edit_text(f"{string}\n\nᴄʜᴀɴɢᴇs ᴅᴏɴᴇ ʙʏ : {mention} !")
+        # تم تعريب رسالة النجاح هنا
+        await mystic.edit_text(f"{string}\n\nتم التعديل بواسطة : {mention} !")
