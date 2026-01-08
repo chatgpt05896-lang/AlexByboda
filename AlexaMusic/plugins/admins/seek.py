@@ -24,7 +24,12 @@ from AlexaMusic.utils import AdminRightsCheck, seconds_to_min
 SEEK_COMMAND = get_command("SEEK_COMMAND")
 
 
-@app.on_message(filters.command(SEEK_COMMAND) & filters.group & ~BANNED_USERS)
+# التعديل هنا: ضفنا prefixes عشان يقبل الأمر كنص عادي
+@app.on_message(
+    filters.command(SEEK_COMMAND, prefixes=["/", "!", "", "."])
+    & filters.group
+    & ~BANNED_USERS
+)
 @AdminRightsCheck
 async def seek_comm(cli, message: Message, _, chat_id):
     if len(message.command) == 1:
@@ -44,6 +49,9 @@ async def seek_comm(cli, message: Message, _, chat_id):
     duration_played = int(playing[0]["played"])
     duration_to_skip = int(query)
     duration = playing[0]["dur"]
+    
+    # تحذير: السطر ده بيعرف الفرق بين "تقديم" و "تأخير" عن طريق حرف 'c'
+    # لو بتستخدم عربي بس، ممكن التقديم يشتغل والتأخير لا، إلا لو ضبطت الـ strings صح
     if message.command[0][-2] == "c":
         if (duration_played - duration_to_skip) <= 10:
             return await message.reply_text(
