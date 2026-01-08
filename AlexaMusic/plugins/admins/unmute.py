@@ -24,13 +24,21 @@ from AlexaMusic.utils.decorators import AdminRightsCheck
 UNMUTE_COMMAND = get_command("UNMUTE_COMMAND")
 
 
-@app.on_message(filters.command(UNMUTE_COMMAND) & filters.group & ~BANNED_USERS)
+# التعديل تم هنا: ضفنا prefixes وحطينا جواها "" عشان يقبل الكلام العادي
+@app.on_message(
+    filters.command(UNMUTE_COMMAND, prefixes=["/", "!", "", "."])
+    & filters.group
+    & ~BANNED_USERS
+)
 @AdminRightsCheck
 async def unmute_admin(Client, message: Message, _, chat_id):
+    # السطر ده بيتأكد إن الأمر جاي لوحده (يعني كلمة "تكلم" بس، مش "تكلم يا بوت")
     if len(message.command) != 1 or message.reply_to_message:
         return await message.reply_text(_["general_2"])
+    
     if not await is_muted(chat_id):
         return await message.reply_text(_["admin_7"], disable_web_page_preview=True)
+    
     await mute_off(chat_id)
     await Alexa.unmute_stream(chat_id)
     await message.reply_text(
