@@ -23,13 +23,20 @@ from AlexaMusic.utils.decorators import AdminRightsCheck
 LOOP_COMMAND = get_command("LOOP_COMMAND")
 
 
-@app.on_message(filters.command(LOOP_COMMAND) & filters.group & ~BANNED_USERS)
+# التعديل هنا: ضفنا prefixes عشان يقبل الأمر بدون علامات
+@app.on_message(
+    filters.command(LOOP_COMMAND, prefixes=["/", "!", "", "."])
+    & filters.group
+    & ~BANNED_USERS
+)
 @AdminRightsCheck
 async def admins(cli, message: Message, _, chat_id):
     usage = _["admin_24"]
     if len(message.command) != 2:
         return await message.reply_text(usage)
     state = message.text.split(None, 1)[1].strip()
+    
+    # التحقق لو القيمة رقم
     if state.isnumeric():
         state = int(state)
         if 1 <= state <= 10:
@@ -43,12 +50,16 @@ async def admins(cli, message: Message, _, chat_id):
             )
         else:
             return await message.reply_text(_["admin_26"])
-    elif state.lower() == "enable":
+    
+    # التحقق لو القيمة "تفعيل" (تم إضافة كلمات عربي هنا عشان يشتغل معاك)
+    elif state.lower() in ["enable", "تفعيل", "تشغيل"]:
         await set_loop(chat_id, 10)
         return await message.reply_text(
             _["admin_25"].format(message.from_user.first_name, state)
         )
-    elif state.lower() == "disable":
+    
+    # التحقق لو القيمة "تعطيل" (تم إضافة كلمات عربي هنا)
+    elif state.lower() in ["disable", "تعطيل", "ايقاف"]:
         await set_loop(chat_id, 0)
         return await message.reply_text(_["admin_27"])
     else:
