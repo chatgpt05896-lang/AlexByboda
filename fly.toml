@@ -1,4 +1,4 @@
-app = "alexbyboda"
+app = "alexbyboda-vaeyeq"
 primary_region = "cdg"
 
 [build]
@@ -7,4 +7,4 @@ primary_region = "cdg"
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
-  memory_mb = 1024
+  memory_mb = 4096
