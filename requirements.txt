@@ -22,5 +22,5 @@ uvloop==0.21.0
 werkzeug
 https://github.com/yt-dlp/yt-dlp/archive/master.zip
 https://github.com/KurimuzonAkuma/pyrogram/archive/dev.zip
-https://github.com/KSKOP69/youtube-search-python/archive/ksk.zip
+gold-dl
 PyYAML~=6.0.3
