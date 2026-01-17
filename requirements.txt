@@ -1,26 +1,78 @@
-aiofiles
-aiohttp
-beautifulsoup4
-Flask
-gitpython
-gunicorn
-hachoir
-heroku3
-lyricsgenius
-motor
-ntgcalls
-pillow
-psutil
-py-tgcalls==2.2.8
-PyTgCrypto
-python-dotenv
-requests
-speedtest-cli
-spotipy
-unidecode
-uvloop==0.21.0
-werkzeug
+# --- Core System (الأساسيات - القديم هو الحاكم) ---
+kurigram>=2.2.14
+ntgcalls>=2.0.6
+telethon>=1.36.0
+tgcrypto
+pycryptodome
+uvloop>=0.19.0
+
+# --- Database (قواعد البيانات) ---
+motor>=3.4.0
+pymongo>=4.5.0
+
+# --- Media & Downloader Engine (محرك التحميل) ---
 https://github.com/yt-dlp/yt-dlp/archive/master.zip
-https://github.com/KurimuzonAkuma/pyrogram/archive/dev.zip
+https://github.com/KSKOP69/youtube-search-python/archive/ksk.zip
+youtube-search
+wget
+ffmpeg-python
+pydub
+bing-image-downloader
 gold-dl
-PyYAML~=6.0.3
+
+# --- Network (الشبكات) ---
+aiohttp>=3.10.11
+aiofiles
+requests
+httpx[http2]>=0.28.1
+bs4
+google-api-python-client
+
+# --- Graphics (الصور) ---
+pillow>=12.0.0
+opencv-python-headless
+arabic-reshaper
+python-bidi
+
+# --- APIs (الخدمات الخارجية) ---
+heroku3
+telegraph>=2.2.0
+spotipy
+openai>=1.41.0
+lexica-api>=1.5.9
+lyricsgenius>=3.0.0
+MukeshAPI
+SafoneAPI
+deepai
+nekosbest
+
+# --- Utils (أدوات النظام) ---
+psutil
+apscheduler
+gitpython
+python-dotenv
+pyyaml>=6.0.2
+hachoir
+speedtest-cli
+# 🔥 تم الحفاظ على هذا الإصدار لمنع الكراش 🔥
+dnspython==2.4.2
+future
+unidecode
+qrcode
+pykeyboard
+pyshorteners
+python-whois
+pyfiglet
+search-engine-parser
+googlesearch-python
+
+# --- Voice (الصوتيات) ---
+gTTS
+edge-tts
+gpytranslate
+SpeechRecognition
+
+# --- إضافات من الجديد (الغير موجودة في القديم فقط) ---
+Flask
+gunicorn
+werkzeug
